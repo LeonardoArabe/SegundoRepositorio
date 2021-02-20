@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Pronosticotiempo.Controllers
+﻿namespace Pronosticotiempo.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Pronosticotiempo.Models;
+
     [Route("api/[controller]")]
     [ApiController]
     public class EmotionsController : ControllerBase
     {
-       [HttpGet]
-       [Route("ConNumero")]
-       public string Emocion(int suerte)
+        [HttpGet]
+        [Route("ConNumero")]
+        public string Emocion(int suerte)
         {
             if (suerte == 0)
                 return "Sos una persona indiferente";
@@ -25,7 +21,7 @@ namespace Pronosticotiempo.Controllers
         }
         [HttpPost]
         [Route("ConNumero")]
-        public string Emocion2([FromHeader]int suerte)
+        public string Emocion2([FromHeader] int suerte)
         {
             if (suerte == 0)
                 return "Sos una persona indiferente";
@@ -35,5 +31,18 @@ namespace Pronosticotiempo.Controllers
                 return "Sos una persona aburrida";
             return "Estoy muy ocupado, no te puedo atender en este momento";
         }
+        [HttpPost]
+        [Route("ConModelo")]
+        public string Emocion3([FromBody] Luck luck)
+        {
+            if (luck.LuckId == 0)
+                return "Sos una persona indiferente";
+            if (luck.LuckId == 1)
+                return "Sos una persona feliz";
+            if (luck.LuckId == 3)
+                return "Sos una persona aburrida";
+            return "Estoy muy ocupado, no te puedo atender en este momento";
+        }
     }
 }
+
